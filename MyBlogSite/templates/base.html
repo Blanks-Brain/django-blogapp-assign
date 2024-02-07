@@ -32,29 +32,32 @@
             box-shadow: 0 16px 48px #E3E7EB;
             padding-top: 1px;
         }
+        .navs{
+            background: #57A509;
+        }
     </style>
 
         <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow" id="mainNav">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'home' %}">Djang Blog Site</a>
+        <nav  class="navbar navbar-expand-lg navbar-light bg-light shadow" id="mainNav">
+            <div  class="container-fluid">
+                <a class="navbar-brand"  href="{% url 'home' %}">Djang Blog Site</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                {% comment %} <div class="collapse navbar-collapse" id="navbarResponsive">
+              <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item text-black">
-                            <a class="nav-link text-black font-weight-bold" href="#">About</a>
+                            <a class="nav-link text-black font-weight-bold" href="{% url 'post_new'%}">Add Post</a>
                         </li>
-                        <li class="nav-item text-black">
+                        {% comment %} <li class="nav-item text-black">
                             <a class="nav-link text-black font-weight-bold" href="#">Policy</a>
                         </li>
                         <li class="nav-item text-black">
                             <a class="nav-link text-black font-weight-bold" href="#">Contact</a>
-                        </li>
+                        </li> {% endcomment %}
                     </ul>
-                </div> {% endcomment %}
+                </div> 
             </div>
         </nav>
         {% block content %}
