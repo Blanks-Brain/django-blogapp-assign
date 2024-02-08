@@ -1,10 +1,9 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import Post
-from django.views.generic import ListView,DeleteView
-from django.views.generic import CreateView
+from django.views.generic import ListView,DetailView,UpdateView,DeleteView
 from .forms import PostForm
 from django.contrib.auth import get_user_model
-
+from django.urls import reverse_lazy
 User = get_user_model()
 # Create your views here.
 
@@ -21,12 +20,22 @@ def CreateNewPost(request):
         form = PostForm()
     return render(request, 'post_new.html', {'form': form})
 
-
+class PostUpdateView(UpdateView):
+    model = Post
+    template_name = "post_update.html"
+    fields = ['title','content','status']
+    
+    
 class PostListView(ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
-    
     template_name= 'index.html'
 
-class PostDetailView(DeleteView):
+class PostDetailView(DetailView):
     model = Post
     template_name ='post_detail.html'
+    
+class PostDeleteView(DeleteView):
+    model = Post
+    template_name = 'post_delete.html'
+    success_url = reverse_lazy('home')
+    
