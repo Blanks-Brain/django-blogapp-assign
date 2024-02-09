@@ -2,6 +2,7 @@ from django.urls import reverse
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
+from django.utils import timezone
 
 User = get_user_model()
 # Create your models here.
@@ -33,3 +34,12 @@ class Post(models.Model):
     
     def get_absolute_url(self):
         return reverse("post_detail", kwargs={"slug": self.slug})
+
+class Comment(models.Model):
+    post = models.ForeignKey('blog.Post', on_delete = models.CASCADE, related_name = 'comments')
+    email = models.EmailField(blank=True,null = True)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    
+    def get_absolute_url(self):
+        return reverse("post_comment", kwargs={"slug": self.slug})

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 card mb-4 mt-3 left top">
+      <div class="card-body">
+        <h1>Log In</h1>
+        <form action="" method="post">
+          {% csrf_token %} {{ form.as_p }}
+          <input type="submit" value="LogIn" />
+        </form>
+      </div>
+    </div>
+    {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+  </div>
+</div>
+
+{% endblock content %}
