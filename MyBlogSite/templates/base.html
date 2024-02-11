@@ -63,8 +63,11 @@
                         </li>
                         {% endif %}
                         <li class="nav-item text-black">
-                            <a class="nav-link text-black font-weight-bold" href="#">Log In</a>
+                            <a class="nav-link text-black font-weight-bold" href="{% url 'login' %}">Log In</a>
                         </li> 
+                        <li class="nav-item text-black">
+                            <a class="nav-link text-black font-weight-bold" href="{% url 'logout' %}">Log Out</a>
+                        </li>
                     </ul>
                 </div> 
             </div>

@@ -40,11 +40,11 @@ INSTALLED_APPS = [
     # 3rd party app
      'crispy_forms',
     # Local
-     'users',
+    'accounts.apps.AccountsConfig',
      'blog',
 ]
-AUTH_USER_MODEL = 'users.CustomUser'
-AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
+AUTH_USER_MODEL = 'accounts.CustomUser' 
+AUTHENTICATION_BACKENDS = ['accounts.backends.EmailBackend']
 
 
 
@@ -132,4 +132,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGOUT_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
