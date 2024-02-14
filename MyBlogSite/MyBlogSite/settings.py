@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 3rd party app
      'crispy_forms',
+     'rest_framework',
+     
     # Local
-    'accounts.apps.AccountsConfig',
+    'accounts',
      'blog',
+     'api',
 ]
 AUTH_USER_MODEL = 'accounts.CustomUser' 
 AUTHENTICATION_BACKENDS = ['accounts.backends.EmailBackend']
@@ -144,3 +147,14 @@ EMAIL_HOST_USER = "jobaergaibandha@gmail.com"
 EMAIL_HOST_PASSWORD = "rfxchydvrqliphlg"
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+
+REST_FRAMEWORK = {
+'DEFAULT_PERMISSION_CLASSES': [
+'rest_framework.permissions.IsAuthenticated',
+],
+'DEFAULT_AUTHENTICATION_CLASSES': [
+'rest_framework.authentication.SessionAuthentication',
+'rest_framework.authentication.TokenAuthentication', # new
+],
+}

@@ -41,5 +41,4 @@ class Comment(models.Model):
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     
-    def get_absolute_url(self):
-        return reverse("post_comment", kwargs={"slug": self.slug})
+    
