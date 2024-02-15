@@ -13,6 +13,6 @@ urlpatterns = [
     path('<slug:slug>/comment/',AddCommentView, name='post_comment'),
     path('draft/',DraftPostListView.as_view(), name='draftpost'),
     path('draft/<slug:slug>/publish/',PostPublishView.as_view(), name='post_publish'),
-    path('<slug:slug>/',PostDetailView.as_view(), name='post_detail'),
+    path('<slug:slug>/',PostDetailView, name='post_detail'),
    
 ]

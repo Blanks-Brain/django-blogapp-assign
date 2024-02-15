@@ -37,8 +37,12 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', on_delete = models.CASCADE, related_name = 'comments')
-    email = models.EmailField(blank=True,null = True)
+    author = models.TextField(default = False)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     
     
+    class Meta:
+        ordering = ['created_date']
+    
+   

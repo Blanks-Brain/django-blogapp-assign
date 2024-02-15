@@ -1,25 +1,51 @@
 {% extends 'base.html' %} {% block content %}
-
 <div class="container">
   <div class="row">
-    <div class="col-md-8 card mb-4  mt-3 left  top">
+    <div class="col-md-8 card mb-4 mt-3 left top">
       <div class="card-body">
-        <h1>{% block title %} {{ object.title }} {% endblock title %}</h1>
-        <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
-        <p class="card-text ">{{ object.content | safe }}</p>
+        <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
+        <p class="text-muted">{{ post.author }} | {{ post.created_on }}</p>
+        <p class="card-text">{{ post.content | safe }}</p>
+        <!-- comments -->
+        <h4>{{ comments.count }} comments</h4>
+        {% for comment in comments %}
+        <div class="comments" style="padding: 10px">
+          <p class="font-weight-bold">
+            {{ comment.author }}
+            <span class="text-muted font-weight-normal">
+              {{ comment.created_date}}
+            </span>
+          </p>
+          {{ comment.text | linebreaks }}
+        </div>
+        {% endfor %}
+        <a href="{% url 'post_comment' post.slug  %}" class="btn btn-primary"
+        >add comment</a>
+        <br><br>
         {%if post.status == 0%}
-        <a href="{% url 'post_publish' post.slug  %}" class="btn btn-primary">Publish</a>
-        <a href="{% url 'post_delete' post.slug  %}" class="btn btn-primary">Remove</a>
+        <a href="{% url 'post_publish' post.slug  %}" class="btn btn-primary"
+          >Publish</a>
+        <a href="{% url 'post_delete' post.slug  %}" class="btn btn-primary"
+          >Remove</a>
 
         {% else %}
-        <a href="{% url 'post_update' post.slug  %}" class="btn btn-primary">Update </a>
-        <a href="{% url 'post_delete' post.slug  %}" class="btn btn-primary">Remove</a>
-        <a href="{% url 'post_comment' post.slug  %}" class="btn btn-primary">Comment</a>
+        <a href="{% url 'post_update' post.slug  %}" class="btn btn-primary"
+          >Update
+        </a>
+        <a href="{% url 'post_delete' post.slug  %}" class="btn btn-primary"
+          >Remove</a
+        >
+        {% comment %}
+        <a href="{% url 'post_comment' post.slug  %}" class="btn btn-primary"
+          >Comment</a
+        >
+        {% endcomment %} 
         {%endif%}
+       
       </div>
     </div>
     {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+
   </div>
 </div>
-
 {% endblock content %}
