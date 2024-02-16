@@ -32,7 +32,6 @@ def AddCommentView(request,slug):
             new_comment = comment_form.save(commit=False)
             new_comment.post = post
             new_comment.author = request.user
-            
             new_comment.save()
             return redirect('post_detail', slug= post.slug)
     else:
