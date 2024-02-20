@@ -19,7 +19,7 @@ class PostDetailApiView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
     lookup_field = 'slug'
     
-class BlogApiView(generics.ListCreateAPIView):
+class BlogCommentApiView(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = BlogCommentSerializer
     lookup_field = 'slug'

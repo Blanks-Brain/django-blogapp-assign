@@ -3,7 +3,7 @@ from django.contrib.auth import views as auth_views
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.views.generic import View
-from .forms import CustomLoginForm,CustomRegisterForm
+from .forms import CustomRegisterForm,CustomLoginForm
 from django.contrib.auth import logout
 
 
@@ -46,9 +46,7 @@ class CustomUserSignupApi(APIView):
                 return Response({
                     'status': 200,
                     'message': 'registration successfully check email',
-                    'data': serializer.data,
-                    
-                    
+                    'data': serializer.data,                  
                 })
             
             return Response({
@@ -62,14 +60,17 @@ class CustomUserSignupApi(APIView):
 class VerifyOtp(APIView):
     def post(self,request):
         try:
-            data = request.data 
+            data = request.data
+            print(data)
             serializer = VerifyAccountSerializer(data=data)
+            print(serializer)
             if serializer.is_valid():
                email = serializer['email']
                otp = serializer['otp']
                user = CustomUser.objects.filter(email = email)
                
                print(user)
+               print(email,otp)
                if not user.exists():
                     return Response({
                     'status': 400,
