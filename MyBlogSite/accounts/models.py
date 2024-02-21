@@ -6,9 +6,9 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     username = models.CharField(max_length = 50, blank = True, null = True, unique = True)
     email = models.EmailField(unique=True,blank=True,null=True)
-    otp = models.CharField(max_length=6,blank=True,null=True)
     is_active = models.BooleanField(default = False)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
     
     objects = CustomUserManager()
+
