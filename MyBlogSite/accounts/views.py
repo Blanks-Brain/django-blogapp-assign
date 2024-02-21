@@ -86,7 +86,7 @@ class VerifyOtp(APIView):
                     })
                 
                user = user.first()    
-               user.is_verified=True
+               user.is_active=True
                user.save()
                        
         except Exception as e:
