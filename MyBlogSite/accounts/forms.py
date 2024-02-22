@@ -8,6 +8,6 @@ class CustomRegisterForm(UserCreationForm):
         fields = ('email', 'username', 'password1', 'password2')
 
 class CustomLoginForm(AuthenticationForm):
-    username = forms.CharField(label='Email / Username')
+    username = forms.CharField(label='Email')
         
 

@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import View
 from .forms import CustomRegisterForm,CustomLoginForm
 from django.contrib.auth import logout
+from .email import send_otp_via_email
 
 
 # Create your views here.
@@ -29,13 +30,12 @@ class LogoutView(View):
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializer import CustomUserSerializer,VerifyAccountSerializer
-from .email import send_otp_via_email
+from .serializer import CustomUserSerializer,VerifyAccountSerializer,UserlistSerializer
+from rest_framework import generics
 from .models import CustomUser
 
 
 class CustomUserSignupApi(APIView):
-    
     def post(self, request):
         try:
             data = request.data 
@@ -61,15 +61,11 @@ class VerifyOtp(APIView):
     def post(self,request):
         try:
             data = request.data
-            print(data)
             serializer = VerifyAccountSerializer(data=data)
-            print(serializer)
             if serializer.is_valid():
                email = serializer['email']
                otp = serializer['otp']
-               user = CustomUser.objects.filter(email = email)
-               
-               print(user)
+               user = CustomUser.objects.filter(email=email)
                print(email,otp)
                if not user.exists():
                     return Response({
@@ -92,3 +88,13 @@ class VerifyOtp(APIView):
         except Exception as e:
             print(e)
         
+        
+
+class CustomUserList(generics.ListAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserlistSerializer
+
+class CustomUserDetail(generics.RetrieveAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserlistSerializer
+   

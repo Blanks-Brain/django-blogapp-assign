@@ -39,7 +39,7 @@ class Comment(models.Model):
     post = models.ForeignKey('blog.Post', on_delete = models.CASCADE, related_name = 'comments')
     author = models.TextField(default = False)
     text = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(auto_now_add=True)
     
     
     class Meta:

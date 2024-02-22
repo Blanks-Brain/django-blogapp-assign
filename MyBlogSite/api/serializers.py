@@ -5,9 +5,9 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         lookup_field = 'slug'
-        fields = ('title','author','content','status','created_on',)
+        fields = ['title','author','content','status','created_on','comments',]
 
 class BlogCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model= Comment
-        fields = ('text',)
+        fields = ['id','author','text','post',]
