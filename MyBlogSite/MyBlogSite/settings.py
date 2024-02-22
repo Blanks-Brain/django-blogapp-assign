@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     # 3rd party app
      'crispy_forms',
      'rest_framework',
-     
+ 
     # Local
     'accounts',
      'blog',
@@ -150,6 +150,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
+
+# CELERY SETTINGS
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_TIMEZONE = 'Asia/Dhaka'
 
 #SMTP SETTING 
 EMAIL_BACKEND= "django.core.mail.backends.smtp.EmailBackend"
