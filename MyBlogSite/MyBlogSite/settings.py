@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     # 3rd party app
      'crispy_forms',
      'rest_framework',
- 
+     'django_celery_results',
     # Local
+    'send_mail_app',
     'accounts',
      'blog',
      'api',

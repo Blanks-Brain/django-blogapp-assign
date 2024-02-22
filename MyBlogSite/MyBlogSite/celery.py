@@ -17,9 +17,10 @@ app.autodiscover_tasks()
 
 # DJANGO BEAT SETTING 
 
-app.conf.beat_schedule ={
-    
-}
+
+# app.conf.beat_schedule   ={
+   
+# }
 
 @app.task(bind=True)
 def debug_task(self):
