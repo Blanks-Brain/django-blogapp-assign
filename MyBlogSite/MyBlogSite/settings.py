@@ -42,7 +42,6 @@ INSTALLED_APPS = [
      'rest_framework',
      'django_celery_results',
     # Local
-    'send_mail_app',
     'accounts',
      'blog',
      'api',

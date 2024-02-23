@@ -5,8 +5,11 @@ from .forms import PostForm,CommentForm
 from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
 User = get_user_model()
+from .tasks import send_Comment_email_task
 # Create your views here.
 
+def send_email(message):
+    send_Comment_email_task.delay(message) 
 
 def CreateNewPost(request):
     if request.method == "POST":
@@ -17,7 +20,6 @@ def CreateNewPost(request):
             post.save()
             if post.status == 0: # for DraftPost List
                return redirect('draftpost')
-           
             return redirect('post_detail', slug= post.slug)
     else:
         form = PostForm()
@@ -33,6 +35,11 @@ def AddCommentView(request,slug):
             new_comment.post = post
             new_comment.author = request.user
             new_comment.save()
+            fromuser=str(request.user)
+            postuser=str(post.author)
+            data= comment_form.cleaned_data['text']
+            message=[data,fromuser,postuser]
+            send_email(message)
             return redirect('post_detail', slug= post.slug)
     else:
         comment_form = CommentForm()
