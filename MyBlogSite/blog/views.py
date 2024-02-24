@@ -35,10 +35,10 @@ def AddCommentView(request,slug):
             new_comment.post = post
             new_comment.author = request.user
             new_comment.save()
-            fromuser=str(request.user)
-            postuser=str(post.author)
+            commentAuthor=str(request.user)
+            postAuthor=str(post.author)
             data= comment_form.cleaned_data['text']
-            message=[data,fromuser,postuser]
+            message=[data,commentAuthor,postAuthor]
             send_email(message)
             return redirect('post_detail', slug= post.slug)
     else:

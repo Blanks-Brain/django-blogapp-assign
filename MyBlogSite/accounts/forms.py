@@ -6,7 +6,7 @@ class CustomRegisterForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ('email', 'username', 'password1', 'password2')
-
+    
 class CustomLoginForm(AuthenticationForm):
     username = forms.CharField(label='Email')
         

@@ -97,4 +97,6 @@ class CustomUserList(generics.ListAPIView):
 class CustomUserDetail(generics.RetrieveAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserlistSerializer
-   
+
+
+

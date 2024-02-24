@@ -41,12 +41,17 @@ INSTALLED_APPS = [
      'crispy_forms',
      'rest_framework',
      'django_celery_results',
+    'django.contrib.sites',
+   
+    
     # Local
+    
     'accounts',
      'blog',
      'api',
 ]
 AUTH_USER_MODEL = 'accounts.CustomUser' 
+SITE_ID = 1
 AUTHENTICATION_BACKENDS = ['accounts.backends.EmailBackend']
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',

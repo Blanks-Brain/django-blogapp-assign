@@ -10,4 +10,6 @@ class PostSerializer(serializers.ModelSerializer):
 class BlogCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model= Comment
+        lookup_field = 'slug'
         fields = ['id','author','text','post',]
+
