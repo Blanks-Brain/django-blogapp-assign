@@ -39,6 +39,7 @@ class CustomUserSignupApi(APIView):
     def post(self, request):
         try:
             data = request.data 
+            
             serializer = CustomUserSerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
@@ -61,12 +62,15 @@ class VerifyOtp(APIView):
     def post(self,request):
         try:
             data = request.data
+            
             serializer = VerifyAccountSerializer(data=data)
             if serializer.is_valid():
-               email = serializer['email']
-               otp = serializer['otp']
+               email=data['email']
+               otp = (data['otp'])
                user = CustomUser.objects.filter(email=email)
-               print(email,otp)
+               id=user[0].pk
+               userotp=user[0].otp
+               os=int(userotp)
                if not user.exists():
                     return Response({
                     'status': 400,
@@ -74,16 +78,23 @@ class VerifyOtp(APIView):
                     'data': 'invalid user'
                     })
               
-               if user[0].otp!= otp:
+               if os!= otp:
                     return Response({
                     'status': 400,
                     'message':'Something is wrong',
                     'data': 'wrong otp'
                     })
-                
-               user = user.first()    
-               user.is_active=True
-               user.save()
+               
+               if os== otp:
+                   user=user[0]
+                   user.is_active=True
+                   return Response({
+                    'status': 200,
+                    'message':'Successfully activate',
+                    'data': serializer.data
+                    })
+               
+               
                        
         except Exception as e:
             print(e)
