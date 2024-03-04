@@ -42,7 +42,7 @@ INSTALLED_APPS = [
      'rest_framework',
      'django_celery_results',
     'django.contrib.sites',
-   
+    "django_celery_beat",
     
     # Local
     
@@ -56,6 +56,11 @@ AUTHENTICATION_BACKENDS = ['accounts.backends.EmailBackend']
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
+# CELERY BEAT SCHEDULER
+
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+
 
 
 MIDDLEWARE = [
@@ -164,7 +169,9 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_TIMEZONE = 'Asia/Dhaka'
+CELERY_RESULT_EXTENDED = True
 
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 #SMTP SETTING 
 EMAIL_BACKEND= "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_USE_TLS = True
@@ -185,3 +192,4 @@ EMAIL_USE_SSL = False
 # 'rest_framework.authentication.TokenAuthentication', # new
 # ],
 # }
+

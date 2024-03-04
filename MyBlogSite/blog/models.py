@@ -17,6 +17,7 @@ class Post(models.Model):
     slug = models.SlugField(max_length=200, unique=True,null=False)
     author = models.ForeignKey(User, on_delete = models.CASCADE ,related_name='blog_posts')
     content = models.TextField()
+    today_date = models.DateField(auto_now_add= True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now= True)
     status = models.IntegerField(choices = STATUS, default = 0)
@@ -43,6 +44,6 @@ class Comment(models.Model):
     
     
     class Meta:
-        ordering = ['created_date']
+        ordering = ['-created_date']
     
    
